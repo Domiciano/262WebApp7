@@ -1,13 +1,12 @@
 import api from "./Api.js";
-async function login(){
+async function login({username, password}){
     const response = await api.post('/auth/login', 
         {
-            username:"nicolas",
-            password: "123456"
+            'username': username,
+            'password': password
         }
     );
-    console.log(response.data.accessToken);
+    return response.data.accessToken;
 }
 
 export {login};
-
