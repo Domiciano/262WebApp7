@@ -1,8 +1,4 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
 import {login} from './services/AuthServices';
 
 function App() {
@@ -19,16 +15,27 @@ function App() {
     login();
   }
   return (
-    <>
-      <h1>Inicio sesion</h1>
-      <form>
-        <input value={username} onChange={ (e) => setUsername(e.target.value) } placeholder='Nombre de usuario' type='text'></input>
-        <input value={password} onChange={ (e) => setPassword(e.target.value) } placeholder='password' type='password'></input>
-        <button onClick={ (e)=> handleLogin(e) }>Iniciar sesión</button>
-      </form>
+    <main className="login">
+      <div className="login-card">
+        <h1>Iniciar sesión</h1>
+        <p className="login-subtitle">Ingresa con tu usuario y contraseña</p>
+        <form>
+          <label>
+            Usuario
+            <input value={username} onChange={ (e) => setUsername(e.target.value) } placeholder='Nombre de usuario' type='text'></input>
+          </label>
+          <label>
+            Contraseña
+            <input value={password} onChange={ (e) => setPassword(e.target.value) } placeholder='Contraseña' type='password'></input>
+          </label>
+          <button onClick={ (e)=> handleLogin(e) }>Iniciar sesión</button>
+        </form>
 
-      <a href="#" onClick={(e)=>e.preventDefault()}>No tengo una cuenta</a>
-    </>
+        <p className="login-footer">
+          ¿No tienes cuenta? <a href="#" onClick={(e)=>e.preventDefault()}>Regístrate</a>
+        </p>
+      </div>
+    </main>
   );
 }
 
