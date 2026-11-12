@@ -6,7 +6,6 @@
   --border: #d1d5db;
   --accent: #4f46e5;
   --accent-hover: #4338ca;
-  --link: #4f46e5;
   --accent-ring: rgba(79, 70, 229, 0.25);
   --error: #b91c1c;
   --error-bg: #fef2f2;
@@ -28,7 +27,6 @@
     --border: #374151;
     --accent: #6366f1;
     --accent-hover: #4f46e5;
-    --link: #a5b4fc;
     --accent-ring: rgba(129, 140, 248, 0.3);
     --error: #fca5a5;
     --error-bg: rgba(185, 28, 28, 0.15);
@@ -140,20 +138,4 @@ body {
   color: var(--error);
   background: var(--error-bg);
   border-radius: 8px;
-}
-
-.login-footer {
-  margin: 24px 0 0;
-  font-size: 14px;
-  text-align: center;
-}
-
-.login-footer a {
-  color: var(--link);
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.login-footer a:hover {
-  text-decoration: underline;
 }

@@ -30,10 +30,6 @@ function App() {
           </label>
           <button onClick={ (e)=> handleLogin(e) }>Iniciar sesión</button>
         </form>
-
-        <p className="login-footer">
-          ¿No tienes cuenta? <a href="#" onClick={(e)=>e.preventDefault()}>Regístrate</a>
-        </p>
       </div>
     </main>
   );
