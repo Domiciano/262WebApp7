@@ -9,19 +9,29 @@ function LoginPage() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     async function handleLogin(e){
         e.preventDefault();
         setUsername("");
         setPassword("");
-        let token = await login({
-            username: username,
-            password: password
-        });
-        console.log(token);
-        localStorage.setItem('accessToken', token);
-        //Navegar hacia homepage
-        navigate('/home');
+        setError("");
+        try {
+            let token = await login({
+                username: username,
+                password: password
+            });
+            console.log(token);
+            localStorage.setItem('accessToken', token);
+            //Navegar hacia homepage
+            navigate('/home');
+        } catch (err) {
+            if (err.response?.status === 401) {
+                setError('Usuario o contraseña incorrectos');
+            } else {
+                setError('No se pudo conectar con el servidor');
+            }
+        }
     }
     return (
     <main className="login">
@@ -37,6 +47,7 @@ function LoginPage() {
             Contraseña
             <input value={password} onChange={ (e) => setPassword(e.target.value) } placeholder='Contraseña' type='password'></input>
             </label>
+            {error && <p className="login-error">{error}</p>}
             <button onClick={ (e)=> handleLogin(e) }>Iniciar sesión</button>
         </form>
         </div>

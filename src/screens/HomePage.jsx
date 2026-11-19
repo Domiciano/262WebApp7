@@ -1,28 +1,31 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import {getCourses} from '../services/CourseServices';
 
 function HomePage(){
-
-    async function handleGetCourses(){
-        let token = localStorage.getItem('accessToken');
-        let cursos = await getCourses({token:token});
-        console.log(cursos);
-    }
+    const [cursos, setCursos] = useState([]);
+    const token = localStorage.getItem('accessToken');
 
     //Zona del useEffect
     useEffect(() => {
-        console.log(12);
-        //Llamado al API
-        handleGetCourses();
-        //Guardando los elemento los elementos en el estado
-        //setCursos(cursos);
+        if (!token) return;
+        //Llamado al API y guardando los elementos en el estado
+        getCourses({token:token}).then((cursos) => setCursos(cursos));
+    }, [token]);
 
-    }, []);
-
+    //Sin token no hay pantalla de inicio
+    if (!token) {
+        return <Navigate to="/" replace />;
+    }
 
     return (
         <>
             <h1>Lista de cursos</h1>
+            <ul>
+                {cursos.map((curso) => (
+                    <li key={curso.publicId}>{curso.name} · {curso.credits} créditos</li>
+                ))}
+            </ul>
         </>
     );
 }
